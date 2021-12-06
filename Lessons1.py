@@ -1,4 +1,3 @@
-
 def morsecod (word):
     morse = {
     'a' : '.-', 'b' : '-...', 'c' : '-.-.', 
