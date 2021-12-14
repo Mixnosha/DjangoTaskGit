@@ -15,6 +15,18 @@ student_result = Table('student_result', meta, autoload=True)
 session = sessionmaker(bind=engine)
 s = session()
 
+#Декоратор для подсчета времени выполнения запроса
+def time_cout(func):
+    import time
+
+    def counting():
+        start = time.time()
+        func()
+        end = time.time()
+        print('[*] Время выполнения: {} секунд.'.format(end - start))
+
+    print(counting())
+
 class Student():
     def __init__(self, id, first_name, last_name):
         self.id = id
@@ -79,6 +91,7 @@ for row in s.query(Exam_result, Student).filter(Exam_result.student_id == Studen
 print('\n\n\n')
 # Посчитать количество студентов, успешно сдавших экзамен больше 4
 from sqlalchemy import func
+
 print(s.query(func.count(Exam_result.id)).filter(Exam_result.result > 4).scalar())
 
 #Посчитать количество студентов, сдавших экзамен “автоматом” (нет записи в таблице exam_result но есть положительный результат в таблице student_result)
@@ -107,7 +120,17 @@ for row in s.query(Exam_result, Student).filter(Exam_result.student_id == Studen
 
 
 #Вывести фамилию преподавателя, у которого наилучшие результаты по его предметам
+@time_cout
+def last ():
+    for row in s.query(Teacher).order_by(Teacher.result_exam.desc()).limit(1).all():
+        print(row.last_name, ' ', row.result_exam)
+
+    for row in s.query(Exam_result, Student).filter(Exam_result.student_id == Student.id).order_by(
+            Exam_result.result.desc()).limit(5).all():
+        print(row.Student.first_name, ' ', row.Student.last_name, ' ', row.Exam_result.result)
+
+    for row in s.query(Exam_result, Student).filter(Exam_result.student_id == Student.id).filter(
+            Exam_result.result < 4):
+        print(row.Exam_result.student_id, ' ', row.Student.last_name)
 
 
-for row in s.query(Teacher).order_by(Teacher.result_exam.desc()).limit(1).all():
-    print(row.last_name, ' ', row.result_exam)
