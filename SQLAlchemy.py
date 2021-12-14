@@ -120,17 +120,15 @@ for row in s.query(Exam_result, Student).filter(Exam_result.student_id == Studen
 
 
 #Вывести фамилию преподавателя, у которого наилучшие результаты по его предметам
+for row in s.query(Teacher).order_by(Teacher.result_exam.desc()).limit(1).all():
+    print(row.last_name, ' ', row.result_exam)
+
 @time_cout
-def last ():
-    for row in s.query(Teacher).order_by(Teacher.result_exam.desc()).limit(1).all():
-        print(row.last_name, ' ', row.result_exam)
+def last():
+    s.query(Teacher).order_by(Teacher.result_exam.desc()).limit(1).all()
 
-    for row in s.query(Exam_result, Student).filter(Exam_result.student_id == Student.id).order_by(
-            Exam_result.result.desc()).limit(5).all():
-        print(row.Student.first_name, ' ', row.Student.last_name, ' ', row.Exam_result.result)
 
-    for row in s.query(Exam_result, Student).filter(Exam_result.student_id == Student.id).filter(
-            Exam_result.result < 4):
-        print(row.Exam_result.student_id, ' ', row.Student.last_name)
+
+
 
 
