@@ -21,12 +21,13 @@ def morsecod (word):
 def fibonachi ():
     num1 = 1;
     num2 = 1;
-    print (num1 , num2 , sep='  ', end='  ')
+    list = [num1,num2]
     for i in range(99):
-        print(num1 + num2, end='  ')    
+        list.append(num1 + num2)
         num1 , num2 = num2 , num2 + num1;
+    return list
         
-#fibonachi();
+#print(fibonachi());
 
 def combination (list1 , list2):
     reslist = []
@@ -80,7 +81,7 @@ def reverse (list1):
     for i , value  in enumerate(r_list):
         r_list[i] = value[::-1]
     return r_list
-print (reverse(ms))      
+#print (reverse(ms))
 
 def reverse2 (list1):
     return list1[::-1]

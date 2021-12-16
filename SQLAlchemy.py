@@ -210,8 +210,32 @@ def inquiry8():
 ['Александр', 'Беляев', 8]
 ['Александр', 'Беляев', 8]'''
 
-# Вывести фамилию преподавателя, у которого наилучшие результаты по его предметам
-for row in s.query(Teacher).order_by(Teacher.result_exam.desc()).limit(1).all():
-    print(row.last_name, ' ', row.result_exam)
+#Display the name of the teacher who has the best results in his subjects
+@timer
+def inquiry9():
+    list = []
+    for inter in range(1 ,s.query(func.count(Teacher.id)).scalar()):
+        for row in s.query(Teacher.last_name, func.avg(Exam_result.result))\
+                .filter(Exam_result.teacher_id == Teacher.id).filter(Exam_result.teacher_id == inter):
+            list.append(row)
+
+    list2 = []
+    for inter in range(1 ,s.query(func.count(Teacher.id)).scalar()):
+        for row in s.query(func.avg(Exam_result.result))\
+                .filter(Exam_result.teacher_id == Teacher.id).filter(Exam_result.teacher_id == inter):
+            list2.append(row)
+
+
+    for row in range(len(list)):
+        if (max(list2)[0] == list[row][1]):
+            return list[row]
+
+'''Время выполнения функции: 0.071996
+('Шепетюк', Decimal('7.3333'))'''
+
+
+
+
+
 
 
