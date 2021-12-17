@@ -15,14 +15,14 @@ CREATE TABLE student (
   UNIQUE KEY id (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Предмет
+-- Thing
 CREATE TABLE training_course (
   id INTEGER(11) UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
   name VARCHAR(50) NOT NULL,
 PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
--- Преподаватель
+-- Teacher
 CREATE TABLE teacher (
   id INTEGER(11) UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
   first_name VARCHAR(20) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE teacher (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
--- Исправляем ошибки в таблице student
+-- Correcting errors in the student table
 ALTER TABLE students.student CHANGE COLUMN id id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ;
 ALTER TABLE students.training_course ADD COLUMN teacher_id INT(11) UNSIGNED NOT NULL  AFTER name ,
   ADD CONSTRAINT teacher_fk
@@ -198,68 +198,132 @@ INSERT INTO student_result(student_id , training_course_id , exam_id , result , 
            (5 , 6 , 6 , 4 , 'сдал'),
            (6 , 6 , 6 , 5, 'сдал');
 
-#Собственно запросы
-#Выбрать имена и фамилии студентов, успешно сдавших экзамен, упорядоченных по результату экзамена (отличники первые в результате)
+
+--Select the first and last names of the students who successfully passed the exam, sorted by the exam result (the first honors in the result)
 SELECT student.first_name, student.last_name, exam_result.result
     FROM exam_result  INNER JOIN student
     ON student.id = exam_result.student_id
     WHERE exam_result.result >= 4 ORDER BY exam_result.result DESC;
+/*
+['Алексей', 'Варкович', 9]
+['Павел', 'Басенков', 9]
+['Богдан', 'Галаховский', 9]
+['Александр', 'Беляев', 8]
+['Даниил', 'Адамович', 8]
+['Александр', 'Беляев', 8]
+['Александр', 'Бородич', 8]
+['Алексей', 'Варкович', 8]
+['Даниил', 'Адамович', 8]
+['Александр', 'Беляев', 8]
+['Александр', 'Бородич', 7]
+['Богдан', 'Галаховский', 7]
+['Даниил', 'Адамович', 6]
+['Богдан', 'Галаховский', 6]
+['Александр', 'Беляев', 6]
+['Даниил', 'Адамович', 6]
+['Александр', 'Беляев', 6]
+['Алексей', 'Варкович', 6]
+['Александр', 'Беляев', 6]
+['Павел', 'Басенков', 6]
+['Богдан', 'Галаховский', 6]
+['Павел', 'Басенков', 5]
+['Богдан', 'Галаховский', 5]
+['Даниил', 'Адамович', 5]
+['Даниил', 'Адамович', 4]
+['Богдан', 'Галаховский', 4]
+['Александр', 'Бородич', 4]
+*/
 
-#Посчитать количество студентов, успешно сдавших экзамен выше 5
+
+--Count the number of students who successfully passed the exam above 5
 SELECT COUNT(result) AS 'Кол-во студентов' FROM exam_result WHERE result >= 6
+--24
 
-#Посчитать количество студентов, сдвших экзамен “автоматом” (нет записи в таблице exam_result.note)
+--Count the number of students who passed the exam “automatically” (there is no entry in the table exam_result.note)
 SELECT COUNT(note) AS 'Кол-во студентов' FROM exam_result WHERE note = '';
+--6
 
-#Посчитать средний балл студентов по предмету с наименованием “Химия”
+--Calculate the average score of students in the subject with the name "Chemistry"
 SELECT AVG(result) AS 'средний балл Химия' FROM exam_result WHERE exam_id = 5;
+--3.5000
 
-#Выбрать имена и фамилии студентов, не сдававших экхзамен по предмету “Икг” (2 вида запроса)
-#1
+--Select the names and surnames of students who did not take the exam in the subject "IKG" (2 types of request)
+--1
 SELECT student.first_name, student.last_name, exam_result.result , exam_result.exam_id
     FROM exam_result  INNER JOIN student
     ON student.id = exam_result.student_id
     WHERE exam_result.result < 4 AND exam_result.exam_id = 6 ORDER BY exam_result.result DESC;
-#2
+    /*
+['Павел', 'Басенков']
+['Алексей', 'Варкович']
+['Александр', 'Бородич']
+['Павел', 'Басенков']
+['Александр', 'Бородич']
+['Павел', 'Басенков']
+['Александр', 'Бородич']
+['Алексей', 'Варкович']
+['Алексей', 'Варкович']
+    */
+--2
 SELECT student.first_name, student.last_name, exam_result.result , exam_result.exam_id
     FROM exam_result  INNER JOIN student
     ON student.id = exam_result.student_id
     WHERE exam_result.note = 'не сдал' AND exam_result.exam_id = 6 ORDER BY exam_result.result DESC;
+    /*
+['Павел', 'Басенков']
+['Алексей', 'Варкович']
+['Александр', 'Бородич']
+['Павел', 'Басенков']
+['Александр', 'Бородич']
+['Павел', 'Басенков']
+['Александр', 'Бородич']
+['Алексей', 'Варкович']
+['Алексей', 'Варкович']
+    */
 
-#Выбрать идентификатор преподавателей, читающих лекции по больше чем по 1 предметам
+--Select the identifier of teachers lecturing in more than 1 subjects
 SELECT teacher.last_name , training_course.teacher_id  AS 'ID Учителя'
     FROM training_course INNER JOIN teacher
     ON teacher.id = training_course.teacher_id
     WHERE training_course.id <> training_course.teacher_id ORDER BY training_course.teacher_id ;
+--1
+--5
 
-# Выбрать идентификатор и фамилии студентов, пересдававших хотя бы 1 предмет (оценка меньше 4 == пересдача)
+--Select the identifier and surnames of students who retake at least 1 subject (score less than 4 == retake)
 SELECT  exam_result.student_id , student.last_name, exam_result.result
     FROM exam_result INNER JOIN student
     ON exam_result.student_id = student.id
     WHERE exam_result.result < 4 ORDER BY exam_result.student_id
+/*
+[2, 'Басенков']
+[5, 'Варкович']
+[4, 'Бородич']
+[2, 'Басенков']
+[4, 'Бородич']
+[2, 'Басенков']
+[4, 'Бородич']
+[5, 'Варкович']
+[5, 'Варкович']
+*/
 
-#Вывести имена и фамилии 5 студентов с максимальными оценками
+--Display the first and last names of the 5 students with the highest grades
 SELECT  student.first_name , student.last_name , exam_result.result
     FROM exam_result INNER JOIN student
     ON exam_result.student_id = student.id
     ORDER BY exam_result.result DESC LIMIT 5;
+/*
+['Богдан', 'Галаховский', 9]
+['Павел', 'Басенков', 9]
+['Алексей', 'Варкович', 9]
+['Александр', 'Беляев', 8]
+['Александр', 'Беляев', 8]
+*/
 
-#Вывести фамилию преподавателя, у которого наилучшие результаты по его предметам
+--Display the name of the teacher who has the best results in his subjects
+SELECT teacher.last_name , AVG(exam_result.result) AS 'avg'
+FROM exam_result INNER JOIN teacher
+ON exam_result.teacher_id = teacher.id
+GROUP BY exam_result.exam_id
+ORDER BY avg DESC LIMIT 1
+--(Шепетюк, 7.3333)
 
-ALTER TABLE students.teacher ADD COLUMN result_exam FLOAT  AFTER last_name
-
-SELECT AVG(result) FROM exam_result WHERE exam_id = 1; #5.16
-SELECT AVG(result) FROM exam_result WHERE exam_id = 2; #6.16
-SELECT AVG(result) FROM exam_result WHERE exam_id = 3; #7.33
-SELECT AVG(result) FROM exam_result WHERE exam_id = 4; #5.16
-SELECT AVG(result) FROM exam_result WHERE exam_id = 5; #3.5
-SELECT AVG(result) FROM exam_result WHERE exam_id = 6; #5.83
-
-UPDATE  teacher SET result_exam = 5.16 WHERE id = 1;
-UPDATE  teacher SET result_exam = 6.16 WHERE id = 2;
-UPDATE  teacher SET result_exam = 7.33 WHERE id = 3;
-UPDATE  teacher SET result_exam = 5.16 WHERE id = 4;
-UPDATE  teacher SET result_exam = 3.5 WHERE id = 5;
-UPDATE  teacher SET result_exam = 5.83 WHERE id = 6;
-
-SELECT last_name , result_exam FROM teacher ORDER BY result_exam DESC LIMIT 1;

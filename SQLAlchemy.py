@@ -165,6 +165,28 @@ def inquiry5():
 ['Алексей', 'Варкович']
 ['Алексей', 'Варкович']
 '''
+@timer
+def inquiry5_2():
+    list = []
+    for row in s.query(Student, Exam_result).filter(Student.id == Exam_result.student_id).filter(
+            Exam_result.note == 'не сдал'):
+        list.append([row.Student.first_name, row.Student.last_name])
+    return list
+
+'''Время выполнения функции: 0.437551
+[['Павел', 'Басенков'],
+['Павел', 'Басенков'],
+['Павел', 'Басенков'], 
+['Александр', 'Бородич'],
+['Александр', 'Бородич'],
+['Александр', 'Бородич'],
+['Алексей', 'Варкович'],
+['Алексей', 'Варкович'],
+['Алексей', 'Варкович'],
+['Богдан', 'Галаховский']]'''
+
+
+
 #Select the identifier of teachers lecturing in more than 2 subjects
 @timer
 def inquiry6():
@@ -212,29 +234,12 @@ def inquiry8():
 
 #Display the name of the teacher who has the best results in his subjects
 @timer
-def inquiry9():
-    list = []
-    for inter in range(1 ,s.query(func.count(Teacher.id)).scalar()):
-        for row in s.query(Teacher.last_name, func.avg(Exam_result.result))\
-                .filter(Exam_result.teacher_id == Teacher.id).filter(Exam_result.teacher_id == inter):
-            list.append(row)
+def inquiry10():
+    return s.query(Teacher.last_name, func.avg(Exam_result.result)).filter(Exam_result.teacher_id == Teacher.id).\
+        group_by(Exam_result.exam_id).order_by(func.avg(Exam_result.result).desc()).limit(1).all()
 
-    list2 = []
-    for inter in range(1 ,s.query(func.count(Teacher.id)).scalar()):
-        for row in s.query(func.avg(Exam_result.result))\
-                .filter(Exam_result.teacher_id == Teacher.id).filter(Exam_result.teacher_id == inter):
-            list2.append(row)
-
-
-    for row in range(len(list)):
-        if (max(list2)[0] == list[row][1]):
-            return list[row]
-
-'''Время выполнения функции: 0.071996
-('Шепетюк', Decimal('7.3333'))'''
-
-
-
+'''Время выполнения функции: 0.015626
+[('Шепетюк', Decimal('7.3333'))]'''
 
 
 
