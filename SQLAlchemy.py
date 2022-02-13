@@ -4,7 +4,7 @@ from sqlalchemy.sql import select, and_
 from sqlalchemy import desc
 import time
 
-engine = create_engine("mysql+mysqlconnector://root:Maksim21z*@localhost/students", echo=True)
+engine = create_engine("mysql+mysqlconnector://root:password@localhost/students", echo=True)
 meta = MetaData(engine)
 
 student = Table('student', meta, autoload=True)
@@ -225,6 +225,8 @@ def inquiry8():
     for row in s.query(Exam_result, Student).filter(Exam_result.student_id == Student.id).order_by(Exam_result.result.desc()).limit(5).all():
         list.append([row.Student.first_name, row.Student.last_name, row.Exam_result.result])
     return list
+
+inquiry8()
 '''Время выполнения функции: 0.011999
 ['Богдан', 'Галаховский', 9]
 ['Павел', 'Басенков', 9]

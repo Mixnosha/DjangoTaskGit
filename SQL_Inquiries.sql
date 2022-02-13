@@ -182,148 +182,215 @@ INSERT INTO exam_result (exam_result.teacher_id , exam_result.student_id ,
 
                            exam_result.result, exam_result.note,
                            exam_result.exam_id)
-    VALUES (6, 1 , 8, 'сдал', 6),
-           (6, 2 , 6, 'сдал', 6),
-           (6, 3 , 8, '', 6),
-           (6, 4 , 4, 'сдал', 6),
-           (6, 5 , 3, 'не сдал', 6),
-           (6, 6 , 6, 'сдал', 6);
+    VALUES (2, 1 , 8, 'сдал', 2),
+           (2, 2 , 6, 'сдал', 2),
+           (2, 3 , 8, '', 2),
+           (2, 4 , 4, 'сдал', 2),
+           (2, 5 , 3, 'не сдал', 2),
+           (2, 6 , 6, 'сдал', 2);
 
 
 INSERT INTO student_result(student_id , training_course_id , exam_id , result , note)
-    VALUES (1 , 6 , 6 , 7 , 'сдал'),
-           (2 , 6 , 6 , 6 , 'сдал'),
-           (3 , 6 , 6 , 8 , 'сдал'),
-           (4 , 6 , 6 , 5, 'сдал'),
-           (5 , 6 , 6 , 4 , 'сдал'),
-           (6 , 6 , 6 , 5, 'сдал');
+    VALUES (1 , 2 , 2 , 7 , 'сдал'),
+           (2 , 2 , 2 , 6 , 'сдал'),
+           (3 , 2 , 2 , 8 , 'сдал'),
+           (4 , 2 , 2 , 5, 'сдал'),
+           (5 , 2 , 2 , 4 , 'сдал'),
+           (6 , 2 , 2 , 5, 'сдал');
 
 
---Select the first and last names of the students who successfully passed the exam, sorted by the exam result (the first honors in the result)
+INSERT INTO exam_result (exam_result.teacher_id , exam_result.student_id ,
+
+                           exam_result.result, exam_result.note,
+                           exam_result.exam_id)
+    VALUES (3, 1 , 4, 'сдал', 3),
+           (3, 2 , 6, 'сдал', 3),
+           (3, 3 , 5, 'сдал', 3),
+           (3, 4 , 8, 'сдал', 3),
+           (3, 5 , 3, 'не сдал', 3),
+           (3, 6 , 2, 'не сдал', 3);
+
+
+INSERT INTO student_result(student_id , training_course_id , exam_id , result , note)
+    VALUES (1 , 3 , 3 , 5 , 'сдал'),
+           (2 , 3 , 3 , 5 , 'сдал'),
+           (3 , 3 , 3 , 4 , 'не сдал'),
+           (4 , 3 , 3 , 9, 'сдал'),
+           (5 , 3 , 3 , 4 , 'сдал'),
+           (6 , 3 , 3 , 3, 'не сдал');
+
+INSERT INTO exam_result (exam_result.teacher_id , exam_result.student_id ,
+
+                           exam_result.result, exam_result.note,
+                           exam_result.exam_id)
+    VALUES (4, 1 , 8, 'сдал', 4),
+           (4, 2 , 7, 'сдал', 4),
+           (4, 3 , 9, '', 4),
+           (4, 4 , 9, '', 4),
+           (4, 5 , 4, 'сдал', 4),
+           (4, 6 , 3, 'не сдал', 4);
+
+
+INSERT INTO student_result(student_id , training_course_id , exam_id , result , note)
+    VALUES (1 , 4 , 4 , 7 , 'сдал'),
+           (2 , 4 , 4 , 6 , 'сдал'),
+           (3 , 4 , 4 , 8 , 'сдал'),
+           (4 , 4 , 4 , 9, 'сдал'),
+           (5 , 4 , 4 , 4 , 'сдал'),
+           (6 , 4 , 4 , 2, 'не сдал');
+
+INSERT INTO exam_result (exam_result.teacher_id , exam_result.student_id ,
+
+                           exam_result.result, exam_result.note,
+                           exam_result.exam_id)
+    VALUES (5, 1 , 6, 'сдал', 5),
+           (5, 2 , 5, 'сдал', 5),
+           (5, 3 , 4, 'сдал', 5),
+           (5, 4 , 4, 'сдал', 5),
+           (5, 5 , 3, 'не сдал', 5),
+           (5, 6 , 2, 'не сдал', 5);
+
+
+INSERT INTO student_result(student_id , training_course_id , exam_id , result , note)
+    VALUES (1 , 5 , 5 , 5 , 'сдал'),
+           (2 , 5 , 5 , 4 , 'сдал'),
+           (3 , 5 , 5 , 4 , 'сдал'),
+           (4 , 5 , 5 , 5, 'сдал'),
+           (5 , 5 , 5 , 4 , 'сдал'),
+           (6 , 5 , 5 , 3, 'не сдал');
+
+
+INSERT INTO exam_result (exam_result.teacher_id , exam_result.student_id ,
+
+                           exam_result.result, exam_result.note,
+                           exam_result.exam_id)
+    VALUES (6, 1 , 8, 'сдал', 6),
+           (6, 2 , 8, 'сдал', 6),
+           (6, 3 , 7, 'сдал', 6),
+           (6, 4 , 7, 'сдал', 6),
+           (6, 5 , 6, 'сдал', 6),
+           (6, 6 , 8, 'сдал', 6);
+
+
+INSERT INTO student_result(student_id , training_course_id , exam_id , result , note)
+    VALUES (1 , 6 , 6 , 9 , 'сдал'),
+           (2 , 6 , 6 , 9 , 'сдал'),
+           (3 , 6 , 6 , 7 , 'сдал'),
+           (4 , 6 , 6 , 8, 'сдал'),
+           (5 , 6 , 6 , 7 , 'сдал'),
+           (6 , 6 , 6 , 9, 'сдал');
+
+-- Select the first and last names of the students who successfully passed the exam, sorted by the exam result (the first honors in the result)
+Use students;
 SELECT student.first_name, student.last_name, exam_result.result
     FROM exam_result  INNER JOIN student
     ON student.id = exam_result.student_id
     WHERE exam_result.result >= 4 ORDER BY exam_result.result DESC;
 /*
-['Алексей', 'Варкович', 9]
-['Павел', 'Басенков', 9]
-['Богдан', 'Галаховский', 9]
-['Александр', 'Беляев', 8]
-['Даниил', 'Адамович', 8]
-['Александр', 'Беляев', 8]
-['Александр', 'Бородич', 8]
-['Алексей', 'Варкович', 8]
-['Даниил', 'Адамович', 8]
-['Александр', 'Беляев', 8]
-['Александр', 'Бородич', 7]
-['Богдан', 'Галаховский', 7]
-['Даниил', 'Адамович', 6]
-['Богдан', 'Галаховский', 6]
-['Александр', 'Беляев', 6]
-['Даниил', 'Адамович', 6]
-['Александр', 'Беляев', 6]
-['Алексей', 'Варкович', 6]
-['Александр', 'Беляев', 6]
-['Павел', 'Басенков', 6]
-['Богдан', 'Галаховский', 6]
-['Павел', 'Басенков', 5]
-['Богдан', 'Галаховский', 5]
-['Даниил', 'Адамович', 5]
-['Даниил', 'Адамович', 4]
-['Богдан', 'Галаховский', 4]
-['Александр', 'Бородич', 4]
+Александр,Бородич,9
+Александр,Беляев,9
+Богдан,Галаховский,8
+Александр,Бородич,8
+Александр,Беляев,8
+Александр,Беляев,8
+Павел,Басенков,8
+Даниил,Адамович,8
+Даниил,Адамович,8
+Даниил,Адамович,8
+Павел,Басенков,7
+Александр,Бородич,7
+Александр,Бородич,7
+Александр,Беляев,7
+Даниил,Адамович,6
+Павел,Басенков,6
+Павел,Басенков,6
+Алексей,Варкович,6
+Богдан,Галаховский,6
+Богдан,Галаховский,6
+Даниил,Адамович,6
+Александр,Беляев,5
+Павел,Басенков,5
+Александр,Беляев,4
+Александр,Бородич,4
+Даниил,Адамович,4
+Александр,Бородич,4
+Алексей,Варкович,4
+
 */
 
 
---Count the number of students who successfully passed the exam above 5
-SELECT COUNT(result) AS 'Кол-во студентов' FROM exam_result WHERE result >= 6
---24
+-- Count the number of students who successfully passed the exam above 5
+SELECT COUNT(result) AS 'Кол-во студентов' FROM exam_result WHERE result >= 6;
+-- 21
 
---Count the number of students who passed the exam “automatically” (there is no entry in the table exam_result.note)
+-- Count the number of students who passed the exam “automatically” (there is no entry in the table exam_result.note)
 SELECT COUNT(note) AS 'Кол-во студентов' FROM exam_result WHERE note = '';
---6
+-- 3
 
---Calculate the average score of students in the subject with the name "Chemistry"
+-- Calculate the average score of students in the subject with the name "Chemistry"
 SELECT AVG(result) AS 'средний балл Химия' FROM exam_result WHERE exam_id = 5;
---3.5000
+-- 4.0000
 
---Select the names and surnames of students who did not take the exam in the subject "IKG" (2 types of request)
---1
+-- Select the names and surnames of students who did not take the exam in the subject "IKG" (2 types of request)
+-- 1
 SELECT student.first_name, student.last_name, exam_result.result , exam_result.exam_id
     FROM exam_result  INNER JOIN student
     ON student.id = exam_result.student_id
     WHERE exam_result.result < 4 AND exam_result.exam_id = 6 ORDER BY exam_result.result DESC;
-    /*
-['Павел', 'Басенков']
-['Алексей', 'Варкович']
-['Александр', 'Бородич']
-['Павел', 'Басенков']
-['Александр', 'Бородич']
-['Павел', 'Басенков']
-['Александр', 'Бородич']
-['Алексей', 'Варкович']
-['Алексей', 'Варкович']
-    */
---2
+
+-- none
+
+-- 2
 SELECT student.first_name, student.last_name, exam_result.result , exam_result.exam_id
     FROM exam_result  INNER JOIN student
     ON student.id = exam_result.student_id
     WHERE exam_result.note = 'не сдал' AND exam_result.exam_id = 6 ORDER BY exam_result.result DESC;
-    /*
-['Павел', 'Басенков']
-['Алексей', 'Варкович']
-['Александр', 'Бородич']
-['Павел', 'Басенков']
-['Александр', 'Бородич']
-['Павел', 'Басенков']
-['Александр', 'Бородич']
-['Алексей', 'Варкович']
-['Алексей', 'Варкович']
-    */
 
---Select the identifier of teachers lecturing in more than 1 subjects
-SELECT teacher.last_name , training_course.teacher_id  AS 'ID Учителя'
+-- none
+
+-- Select the identifier of teachers lecturing in more than 1 subjects
+SELECT teacher.last_name , training_course.teacher_id  AS 'Teacher id'
     FROM training_course INNER JOIN teacher
     ON teacher.id = training_course.teacher_id
     WHERE training_course.id <> training_course.teacher_id ORDER BY training_course.teacher_id ;
---1
---5
+-- none
 
---Select the identifier and surnames of students who retake at least 1 subject (score less than 4 == retake)
+-- Select the identifier and surnames of students who retake at least 1 subject (score less than 4 == retake)
 SELECT  exam_result.student_id , student.last_name, exam_result.result
     FROM exam_result INNER JOIN student
     ON exam_result.student_id = student.id
-    WHERE exam_result.result < 4 ORDER BY exam_result.student_id
+    WHERE exam_result.result < 4 ORDER BY exam_result.student_id;
 /*
-[2, 'Басенков']
-[5, 'Варкович']
-[4, 'Бородич']
-[2, 'Басенков']
-[4, 'Бородич']
-[2, 'Басенков']
-[4, 'Бородич']
-[5, 'Варкович']
-[5, 'Варкович']
+2,Басенков,3
+5,Варкович,1
+5,Варкович,3
+5,Варкович,3
+5,Варкович,3
+6,Галаховский,2
+6,Галаховский,3
+6,Галаховский,2
+
 */
 
---Display the first and last names of the 5 students with the highest grades
+-- Display the first and last names of the 5 students with the highest grades
 SELECT  student.first_name , student.last_name , exam_result.result
     FROM exam_result INNER JOIN student
     ON exam_result.student_id = student.id
     ORDER BY exam_result.result DESC LIMIT 5;
 /*
-['Богдан', 'Галаховский', 9]
-['Павел', 'Басенков', 9]
-['Алексей', 'Варкович', 9]
-['Александр', 'Беляев', 8]
-['Александр', 'Беляев', 8]
+Александр,Бородич,9
+Александр,Беляев,9
+Даниил,Адамович,8
+Богдан,Галаховский,8
+Павел,Басенков,8
+
 */
 
---Display the name of the teacher who has the best results in his subjects
+-- Display the name of the teacher who has the best results in his subjects
 SELECT teacher.last_name , AVG(exam_result.result) AS 'avg'
 FROM exam_result INNER JOIN teacher
 ON exam_result.teacher_id = teacher.id
 GROUP BY exam_result.exam_id
 ORDER BY avg DESC LIMIT 1
---(Шепетюк, 7.3333)
+-- Шепетюк, 7.333
 
